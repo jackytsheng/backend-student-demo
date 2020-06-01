@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Dto.StudentPostDTO;
 import com.example.demo.Entity.Student;
 import com.example.demo.Service.StudentService;
 import com.example.demo.jwtUtil;
@@ -21,22 +22,16 @@ public class PostController {
   @Autowired
   private StudentService studentService;
 
-
-  @PostMapping("authenticate")
-  ResponseEntity<String> login(@RequestBody Student student){
-    return new ResponseEntity<>(jwtUti.createUser(student), HttpStatus.OK);
-  }
-
   @PostMapping("students")
-  ResponseEntity<String> add(@RequestBody Student student){
-    studentService.addStudent(student);
+  ResponseEntity<String> add(@RequestBody StudentPostDTO studentDto){
+    studentService.addStudent(studentDto);
     return new ResponseEntity<>("Student added", HttpStatus.OK);
   }
-
-  @PostMapping("validate")
-  ResponseEntity<String> validateUser(@RequestHeader("Authorization") String token){
-    if(jwtUti.validateUser(token)){
-    return ResponseEntity.ok("User Validated");}
-    else{return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid JWT token");}
-  }
+//
+//  @PostMapping("validate")
+//  ResponseEntity<String> validateUser(@RequestHeader("Authorization") String token){
+//    if(jwtUti.validateUser(token)){
+//    return ResponseEntity.ok("User Validated");}
+//    else{return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid JWT token");}
+//  }
 }

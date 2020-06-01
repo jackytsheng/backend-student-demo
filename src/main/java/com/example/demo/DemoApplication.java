@@ -22,8 +22,11 @@ public class DemoApplication {
 	@Bean
 	CommandLineRunner runner(StudentRepository studentRepository){
 		return args->{
-			studentRepository.save(new Student("Jacky","student"));
-			studentRepository.save(new Student("Jacky Zheng","student"));
+			Student s1 = new Student();
+			s1.setRole("Student");
+			s1.setName("Mike Chan");
+			s1.setEmail("Mike@qq.com");
+			studentRepository.save(s1);
 		};
 	}
 

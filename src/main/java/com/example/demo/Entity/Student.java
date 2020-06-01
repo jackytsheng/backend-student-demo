@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,18 +14,16 @@ import javax.persistence.Id;
 @Entity
 public class Student {
 
-  private String name;
-
   @Id @GeneratedValue
   private Long studentID;
 
+  @Column(nullable = false)
+  private String name;
 
+  @Column(nullable = false)
+  private String email;
+
+  @Column(nullable = false)
   private String role;
-
-  public Student(){}
-  public Student(String name,String role){
-    this.name=name;
-    this.role=role;
-  }
 
 }
