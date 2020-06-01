@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Entity.Student;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,7 +19,7 @@ public class jwtUtil {
 
   public String createUser(Student student){
 
-    String jwt = Jwts.builder().setSubject(student.getName()).signWith(key).compact();
+    String jwt = Jwts.builder().setSubject(student.getName()).claim("role",student.getRole()).signWith(key).compact();
     return jwt;
   }
 
@@ -26,6 +27,14 @@ public class jwtUtil {
     String assumeUser = "Jacky";
     try {
       return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody().getSubject().equals(assumeUser);
+    }
+    catch (JwtException e){
+      return false;
+    }
+  }
+  public boolean isAuthorized(String jwt){
+    try {
+      return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody().getSubject().equals("admin");
     }
     catch (JwtException e){
       return false;

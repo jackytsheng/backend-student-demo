@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Student;
+import com.example.demo.Entity.Student;
+import com.example.demo.Service.StudentService;
 import com.example.demo.jwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,19 @@ public class PostController {
   @Autowired
   private jwtUtil jwtUti;
 
+  @Autowired
+  private StudentService studentService;
+
 
   @PostMapping("authenticate")
   ResponseEntity<String> login(@RequestBody Student student){
     return new ResponseEntity<>(jwtUti.createUser(student), HttpStatus.OK);
+  }
+
+  @PostMapping("students")
+  ResponseEntity<String> add(@RequestBody Student student){
+    studentService.addStudent(student);
+    return new ResponseEntity<>("Student added", HttpStatus.OK);
   }
 
   @PostMapping("validate")

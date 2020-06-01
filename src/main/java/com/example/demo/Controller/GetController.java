@@ -1,31 +1,37 @@
 package com.example.demo.Controller;
 
 
-import com.example.demo.Student;
+import com.example.demo.Entity.Student;
+import com.example.demo.Service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
 public class GetController {
 
-  @GetMapping("students")
-  ResponseEntity<List<Student>> all(){
-    Student Student1 = new Student("Jacky",1,"Student");
-    Student Student2 = new Student("Jacky2",2,"Student");
-    List<Student> StudentList = new ArrayList<>();
-    StudentList.add(Student1);
-    StudentList.add(Student2);
+  @Autowired
+  private StudentService studentService;
 
-    return new ResponseEntity<>(StudentList, HttpStatus.OK);
+
+  @GetMapping("students")
+  public ResponseEntity<List<Student>> all(){
+    return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
   }
 
+  @GetMapping("unauthorised")
+  ResponseEntity<String> unauthorised(){
+    return new ResponseEntity<> ("Unauthorised User", HttpStatus.FORBIDDEN);
+  }
+
+  @GetMapping("notLogin")
+  ResponseEntity<String> notLogin(){
+    return new ResponseEntity<> ("you need to login first", HttpStatus.FORBIDDEN);
+  }
 
 }
