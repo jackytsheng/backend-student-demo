@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Dto.StudentGetDTO;
 import com.example.demo.Dto.StudentPostDTO;
 import com.example.demo.Entity.Student;
 import com.example.demo.Service.StudentService;
@@ -23,9 +24,9 @@ public class PostController {
   private StudentService studentService;
 
   @PostMapping("students")
-  ResponseEntity<String> add(@RequestBody StudentPostDTO studentDto){
-    studentService.addStudent(studentDto);
-    return new ResponseEntity<>("Student added", HttpStatus.OK);
+  ResponseEntity<StudentGetDTO> add(@RequestBody StudentPostDTO studentDto){
+    StudentGetDTO studentGetDto = studentService.addStudent(studentDto);
+    return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
   }
 //
 //  @PostMapping("validate")

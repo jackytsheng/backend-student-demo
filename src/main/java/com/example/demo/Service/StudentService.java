@@ -6,14 +6,12 @@ import com.example.demo.Dto.StudentPostDTO;
 import com.example.demo.Entity.Student;
 import com.example.demo.Repository.StudentRepository;
 import com.example.demo.Service.Exception.StudentNotFoundException;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 
 
 @Service
@@ -44,12 +42,16 @@ public class StudentService {
    return studentGetDto;
   }
 
-  public void addStudent(StudentPostDTO studentDto){
+  public StudentGetDTO addStudent(StudentPostDTO studentDto){
     Student student = new Student();
     student.setName(studentDto.getName());
     student.setEmail(studentDto.getEmail());
-    student.setRole("Student");
-    studentRepository.save(student);
+    student.setRole("student");
+    Student s1 = studentRepository.save(student);
+    StudentGetDTO studentGetDto = new StudentGetDTO();
+    studentGetDto.setEmail(s1.getEmail());
+    studentGetDto.setName(s1.getName());
+    studentGetDto.setId(s1.getStudentID());
+    return studentGetDto;
   }
-
 }

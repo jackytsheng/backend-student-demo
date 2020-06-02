@@ -2,10 +2,12 @@ package com.example.demo.Repository;
 
 
 import com.example.demo.Entity.Student;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 
-public interface StudentRepository extends CrudRepository<Student,Long> {
+public interface StudentRepository extends JpaRepository<Student,Long> {
   //CRUD..
   //GetAllstudent
   //Get Student By Id
@@ -13,4 +15,5 @@ public interface StudentRepository extends CrudRepository<Student,Long> {
   //GetStudent
   //UpdateStudent
   //deleteStudent
+  Optional<Student> findByName(String name);
 }

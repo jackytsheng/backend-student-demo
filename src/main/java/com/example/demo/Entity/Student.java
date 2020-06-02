@@ -1,20 +1,19 @@
 package com.example.demo.Entity;
 
 
+import com.example.demo.Dto.StudentPostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Student {
 
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue
   private Long studentID;
 
   @Column(nullable = false)
@@ -25,5 +24,6 @@ public class Student {
 
   @Column(nullable = false)
   private String role;
+
 
 }
