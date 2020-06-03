@@ -6,16 +6,14 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 
 @Component
 @Order(1)
-public class AuthenticateFilter implements Filter {
+public class AuthorizationFilter implements Filter {
 
   @Autowired
   jwtUtil jwt;
@@ -26,20 +24,20 @@ public class AuthenticateFilter implements Filter {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     System.out.println(httpRequest.getRequestURI());
 
-    if (httpRequest.getRequestURI().toString() == "/adminAccess"){
+    if (httpRequest.getRequestURI().equals("/adminAccess")){
       System.out.println("now in adminAccess");
-      String Authorization = httpRequest.getHeader("Authorization") != ""?httpRequest.getHeader("Authorization"):"";
-      if(Authorization == ""){
-        response.getWriter().print("Please Log in first");
-      } else {
-        if(jwt.isAdmin(Authorization)){
+      String Authorization = httpRequest.getHeader("Authorization");
+      System.out.println(Authorization);
+      System.out.println(jwt.isAdmin(Authorization));
+      if(jwt.isAdmin(Authorization)){
           chain.doFilter(request,response);
         }else{
-          response.getWriter().print("You are not authorised to access this page");
+          HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+          httpServletResponse.sendError(403,"Unauthorised access.");
         }
-      }
-    }
+    }else{
     chain.doFilter(request,response);
+    }
   }
 
 

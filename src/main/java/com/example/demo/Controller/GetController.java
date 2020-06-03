@@ -36,6 +36,7 @@ public class GetController {
 
   @GetMapping("adminAccess")
   ResponseEntity<List<StudentGetDTO>> adminGetAll(){
+    System.out.println("In Admin Access");
     List<StudentGetDTO> studentGetDtoList = studentService.getAll();
     return new ResponseEntity<>(studentGetDtoList , HttpStatus.OK);
   }

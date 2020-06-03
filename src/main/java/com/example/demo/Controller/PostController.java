@@ -30,14 +30,14 @@ public class PostController {
 
   @PostMapping("createStudent")
   ResponseEntity<UserGetDTO> createStudent(@RequestBody StudentPostDTO studentDto){
-    UserGetDTO studentGetDto = studentService.addStudentJWT(studentDto);
-    return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
+    UserGetDTO userGetDto = studentService.addStudentJWT(studentDto);
+    return new ResponseEntity<>(userGetDto , HttpStatus.OK);
   }
 
   @PostMapping("createAdmin")
   ResponseEntity<UserGetDTO> createAdmin(@RequestBody StudentPostDTO studentDto){
-    UserGetDTO studentGetDto = studentService.addAdminJWT(studentDto);
-    return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
+    UserGetDTO userGetDto = studentService.addAdminJWT(studentDto);
+    return new ResponseEntity<>(userGetDto , HttpStatus.OK);
   }
 
 }
