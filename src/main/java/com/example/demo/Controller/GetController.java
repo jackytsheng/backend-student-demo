@@ -27,20 +27,17 @@ public class GetController {
     return new ResponseEntity<>(studentGetDtoList , HttpStatus.OK);
   }
 
+
   @GetMapping("students/{id}")
   public ResponseEntity<StudentGetDTO> one(@PathVariable Long id){
     StudentGetDTO studentGetDto = studentService.getOneByID(id);
     return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
   }
 
-  @GetMapping("unauthorised")
-  ResponseEntity<String> unauthorised(){
-    return new ResponseEntity<> ("Unauthorised User", HttpStatus.FORBIDDEN);
-  }
-
-  @GetMapping("notLogin")
-  ResponseEntity<String> notLogin(){
-    return new ResponseEntity<> ("you need to login first", HttpStatus.FORBIDDEN);
+  @GetMapping("adminAccess")
+  ResponseEntity<List<StudentGetDTO>> adminGetAll(){
+    List<StudentGetDTO> studentGetDtoList = studentService.getAll();
+    return new ResponseEntity<>(studentGetDtoList , HttpStatus.OK);
   }
 
 }

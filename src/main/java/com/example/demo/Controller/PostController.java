@@ -2,15 +2,14 @@ package com.example.demo.Controller;
 
 import com.example.demo.Dto.StudentGetDTO;
 import com.example.demo.Dto.StudentPostDTO;
-import com.example.demo.Entity.Student;
+import com.example.demo.Dto.UserGetDTO;
 import com.example.demo.Service.StudentService;
-import com.example.demo.jwtUtil;
+import com.example.demo.Util.jwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -28,11 +27,17 @@ public class PostController {
     StudentGetDTO studentGetDto = studentService.addStudent(studentDto);
     return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
   }
-//
-//  @PostMapping("validate")
-//  ResponseEntity<String> validateUser(@RequestHeader("Authorization") String token){
-//    if(jwtUti.validateUser(token)){
-//    return ResponseEntity.ok("User Validated");}
-//    else{return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid JWT token");}
-//  }
+
+  @PostMapping("createStudent")
+  ResponseEntity<UserGetDTO> createStudent(@RequestBody StudentPostDTO studentDto){
+    UserGetDTO studentGetDto = studentService.addStudentJWT(studentDto);
+    return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
+  }
+
+  @PostMapping("createAdmin")
+  ResponseEntity<UserGetDTO> createAdmin(@RequestBody StudentPostDTO studentDto){
+    UserGetDTO studentGetDto = studentService.addAdminJWT(studentDto);
+    return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
+  }
+
 }
