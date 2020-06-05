@@ -25,17 +25,19 @@ public class AuthorizationFilter implements Filter {
     System.out.println(httpRequest.getRequestURI());
 
     if (httpRequest.getRequestURI().equals("/adminAccess")){
-      System.out.println("now in adminAccess");
       String Authorization = httpRequest.getHeader("Authorization");
-      System.out.println(Authorization);
-      System.out.println(jwt.isAdmin(Authorization));
+      if (Authorization == null){
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        httpServletResponse.sendError(401,"You need to log in first access.");
+      }else{
       if(jwt.isAdmin(Authorization)){
           chain.doFilter(request,response);
         }else{
           HttpServletResponse httpServletResponse = (HttpServletResponse) response;
           httpServletResponse.sendError(403,"Unauthorised access.");
         }
-    }else{
+    }}
+    else{
     chain.doFilter(request,response);
     }
   }
