@@ -25,7 +25,6 @@ public class GetController {
     return new ResponseEntity<>(studentGetDtoList , HttpStatus.OK);
   }
 
-
   @GetMapping("students/{id}")
   public ResponseEntity<StudentGetDTO> one(@PathVariable Long id){
     StudentGetDTO studentGetDto = studentService.getOneByID(id);
