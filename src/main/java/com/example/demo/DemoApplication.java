@@ -23,7 +23,7 @@ public class DemoApplication {
 	CommandLineRunner runner(StudentRepository studentRepository){
 		return args->{
 			Student s1 = new Student();
-			s1.setRole("Student");
+			s1.setRole("student");
 			s1.setName("Mike Chan");
 			s1.setEmail("Mike@qq.com");
 			studentRepository.save(s1);

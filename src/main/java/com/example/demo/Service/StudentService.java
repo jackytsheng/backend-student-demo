@@ -4,7 +4,6 @@ package com.example.demo.Service;
 import com.example.demo.dto.StudentGetDto;
 import com.example.demo.dto.StudentPostDto;
 import com.example.demo.dto.StudentPutDto;
-import com.example.demo.dto.UserGetDto;
 import com.example.demo.Entity.Student;
 import com.example.demo.Repository.StudentRepository;
 import com.example.demo.Service.Exception.StudentNotFoundException;
@@ -75,30 +74,4 @@ public class StudentService {
     return "Student with id " + id + " is deleted";
   }
 
-  public UserGetDto addAdminJWT(StudentPostDto studentDto){
-      Student student = new Student();
-      student.setName(studentDto.getName());
-      student.setEmail(studentDto.getEmail());
-      student.setRole("admin");
-      Student s1 = studentRepository.save(student);
-      UserGetDto userGetDto = new UserGetDto();
-      userGetDto.setEmail(s1.getEmail());
-      userGetDto.setName(s1.getName());
-      userGetDto.setId(s1.getStudentID());
-      userGetDto.setJws(jwtUtil.createUser(student));
-      return userGetDto;
-    }
-  public UserGetDto addStudentJWT(StudentPostDto studentDto){
-    Student student = new Student();
-    student.setName(studentDto.getName());
-    student.setEmail(studentDto.getEmail());
-    student.setRole("student");
-    Student s1 = studentRepository.save(student);
-    UserGetDto userGetDto = new UserGetDto();
-    userGetDto.setEmail(s1.getEmail());
-    userGetDto.setName(s1.getName());
-    userGetDto.setId(s1.getStudentID());
-    userGetDto.setJws(jwtUtil.createUser(student));
-    return userGetDto;
-  }
 }

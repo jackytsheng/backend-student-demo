@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("students")
+@RestController
 public class StudentController {
 
   @Autowired
   private StudentService studentService;
-
-  @Autowired
-  private jwtUtil jwtUti;
 
   @GetMapping
   public ResponseEntity<List<StudentGetDto>> all(){
@@ -42,11 +40,16 @@ public class StudentController {
 
   @PutMapping("/{id}")
   public ResponseEntity<StudentGetDto> edit(@PathVariable Long id, @RequestBody StudentPutDto studentPutDto){
-
     StudentGetDto studentGetDto = studentService.edit(id,studentPutDto);
-
     return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
   }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> delete(@PathVariable Long id){
+    String msg = studentService.delete(id);
+    return new ResponseEntity<>(msg, HttpStatus.OK);
+  }
+
 
 
 
