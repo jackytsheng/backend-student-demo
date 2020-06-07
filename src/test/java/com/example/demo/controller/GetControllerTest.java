@@ -1,22 +1,17 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
 
-import com.example.demo.Dto.StudentGetDTO;
+import com.example.demo.dto.StudentGetDto;
 import com.example.demo.Service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -35,9 +30,9 @@ public class GetControllerTest {
 
   private MockMvc mockMvc;
 
-  private List<StudentGetDTO> students;
-  private StudentGetDTO s1;
-  private StudentGetDTO s2;
+  private List<StudentGetDto> students;
+  private StudentGetDto s1;
+  private StudentGetDto s2;
 
   @Mock
   private StudentService studentService;
@@ -49,8 +44,8 @@ public class GetControllerTest {
   public void setUp() throws Exception{
     mockMvc = MockMvcBuilders.standaloneSetup(getController).build();
 
-    s1 = new StudentGetDTO();
-    s2 = new StudentGetDTO();
+    s1 = new StudentGetDto();
+    s2 = new StudentGetDto();
     s1.setName("Mike Chan");
     s1.setEmail("Miky@gmail.com");
     s1.setId(1L);

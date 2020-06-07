@@ -1,15 +1,15 @@
 package com.example.demo.Service;
 
 
-import com.example.demo.Dto.StudentGetDTO;
-import com.example.demo.Dto.StudentPostDTO;
-import com.example.demo.Dto.UserGetDTO;
+import com.example.demo.dto.StudentGetDto;
+import com.example.demo.dto.StudentPostDto;
+import com.example.demo.dto.StudentPutDto;
+import com.example.demo.dto.UserGetDto;
 import com.example.demo.Entity.Student;
 import com.example.demo.Repository.StudentRepository;
 import com.example.demo.Service.Exception.StudentNotFoundException;
 import com.example.demo.Util.jwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class StudentService {
   private final jwtUtil jwtUtil;
   private final StudentRepository studentRepository;
 
-  public List<StudentGetDTO> getAll(){
-    List<StudentGetDTO> students = new ArrayList<>();
+  public List<StudentGetDto> getAll(){
+    List<StudentGetDto> students = new ArrayList<>();
     studentRepository.findAll().forEach( student -> {
-        StudentGetDTO studentGetDto = new StudentGetDTO();
+        StudentGetDto studentGetDto = new StudentGetDto();
         studentGetDto.setEmail(student.getEmail());
         studentGetDto.setName(student.getName());
         studentGetDto.setId(student.getStudentID());
@@ -36,8 +36,8 @@ public class StudentService {
     return students;
   }
 
-  public StudentGetDTO getOneByID(Long id){
-   StudentGetDTO studentGetDto = new StudentGetDTO();
+  public StudentGetDto getOneByID(Long id){
+   StudentGetDto studentGetDto = new StudentGetDto();
    Student student = studentRepository.findById(id).orElseThrow(()-> new StudentNotFoundException(id));
    studentGetDto.setId(student.getStudentID());
    studentGetDto.setName(student.getName());
@@ -45,39 +45,56 @@ public class StudentService {
    return studentGetDto;
   }
 
-  public StudentGetDTO addStudent(StudentPostDTO studentDto){
+  public StudentGetDto addStudent(StudentPostDto studentDto){
     Student student = new Student();
     student.setName(studentDto.getName());
     student.setEmail(studentDto.getEmail());
     student.setRole("student");
     Student s1 = studentRepository.save(student);
-    StudentGetDTO studentGetDto = new StudentGetDTO();
+    StudentGetDto studentGetDto = new StudentGetDto();
     studentGetDto.setEmail(s1.getEmail());
     studentGetDto.setName(s1.getName());
     studentGetDto.setId(s1.getStudentID());
     return studentGetDto;
   }
 
-  public UserGetDTO addAdminJWT(StudentPostDTO studentDto){
+  public StudentGetDto edit(Long id, StudentPutDto studentPutDto){
+    Student student;
+    student = studentRepository.findById(id).orElseThrow();
+    student.setName(studentPutDto.getName());
+    student.setEmail(studentPutDto.getEmail());
+    studentRepository.save(student);
+    StudentGetDto studentGetDto = new StudentGetDto();
+    studentGetDto.setEmail(student.getEmail());
+    studentGetDto.setName(student.getName());
+    studentGetDto.setId(student.getStudentID());
+    return studentGetDto;
+  }
+  public String delete(Long id){
+    studentRepository.deleteById(id);
+    return "Student with id " + id + " is deleted";
+  }
+
+  public UserGetDto addAdminJWT(StudentPostDto studentDto){
       Student student = new Student();
       student.setName(studentDto.getName());
       student.setEmail(studentDto.getEmail());
       student.setRole("admin");
       Student s1 = studentRepository.save(student);
-      UserGetDTO userGetDto = new UserGetDTO();
+      UserGetDto userGetDto = new UserGetDto();
       userGetDto.setEmail(s1.getEmail());
       userGetDto.setName(s1.getName());
       userGetDto.setId(s1.getStudentID());
       userGetDto.setJws(jwtUtil.createUser(student));
       return userGetDto;
     }
-  public UserGetDTO addStudentJWT(StudentPostDTO studentDto){
+  public UserGetDto addStudentJWT(StudentPostDto studentDto){
     Student student = new Student();
     student.setName(studentDto.getName());
     student.setEmail(studentDto.getEmail());
     student.setRole("student");
     Student s1 = studentRepository.save(student);
-    UserGetDTO userGetDto = new UserGetDTO();
+    UserGetDto userGetDto = new UserGetDto();
     userGetDto.setEmail(s1.getEmail());
     userGetDto.setName(s1.getName());
     userGetDto.setId(s1.getStudentID());

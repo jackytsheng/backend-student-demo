@@ -28,7 +28,7 @@ public class AuthorizationFilter implements Filter {
       String Authorization = httpRequest.getHeader("Authorization");
       if (Authorization == null){
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        httpServletResponse.sendError(401,"You need to log in first access.");
+        httpServletResponse.sendError(401,"You need to log in first.");
       }else{
       if(jwt.isAdmin(Authorization)){
           chain.doFilter(request,response);

@@ -1,9 +1,9 @@
 package com.example.demo.Service;
 
 
-import com.example.demo.Dto.StudentGetDTO;
-import com.example.demo.Dto.StudentPostDTO;
-import com.example.demo.Dto.UserGetDTO;
+import com.example.demo.dto.StudentGetDto;
+import com.example.demo.dto.StudentPostDto;
+import com.example.demo.dto.UserGetDto;
 import com.example.demo.Entity.Student;
 import com.example.demo.Repository.StudentRepository;
 import com.example.demo.Util.jwtUtil;
@@ -41,7 +41,7 @@ public class StudentServiceTest {
 
   @Test
   public void testAddStudent(){
-    StudentPostDTO studentPostDto = new StudentPostDTO();
+    StudentPostDto studentPostDto = new StudentPostDto();
     studentPostDto.setName("Jacky");
     studentPostDto.setEmail("jacky@gmail.com");
 
@@ -51,7 +51,7 @@ public class StudentServiceTest {
     s1.setStudentID(50000L);
 
     when(studentRepository.save(any())).thenReturn(s1);
-    StudentGetDTO studentGetDto = studentService.addStudent(studentPostDto);
+    StudentGetDto studentGetDto = studentService.addStudent(studentPostDto);
     Assert.assertEquals(studentGetDto.getEmail(),studentPostDto.getEmail());
     Assert.assertEquals(studentGetDto.getName(),studentPostDto.getName());
     Assert.assertNotNull(studentGetDto.getId());
@@ -67,7 +67,7 @@ public class StudentServiceTest {
     s1.setStudentID(1L);
 
     when(studentRepository.findById(any())).thenReturn(Optional.of(s1));
-    StudentGetDTO studentGetDto = studentService.getOneByID(1L);
+    StudentGetDto studentGetDto = studentService.getOneByID(1L);
     Assert.assertEquals(studentGetDto.getEmail(),s1.getEmail());
     Assert.assertEquals(studentGetDto.getName(),s1.getName());
     Assert.assertEquals(studentGetDto.getId(),s1.getStudentID());
@@ -92,7 +92,7 @@ public class StudentServiceTest {
 
     when(studentRepository.findAll()).thenReturn(students);
 
-    List<StudentGetDTO> returnedStudents = studentService.getAll();
+    List<StudentGetDto> returnedStudents = studentService.getAll();
     Assert.assertEquals(returnedStudents.get(0).getEmail(),s1.getEmail());
     Assert.assertEquals(returnedStudents.get(0).getName(),s1.getName());
     Assert.assertEquals(returnedStudents.get(0).getId(),s1.getStudentID());
@@ -102,7 +102,7 @@ public class StudentServiceTest {
   }
   @Test
   public void testCreateStudentJWT(){
-    StudentPostDTO studentPostDto = new StudentPostDTO();
+    StudentPostDto studentPostDto = new StudentPostDto();
     studentPostDto.setName("Jacky");
     studentPostDto.setEmail("jacky@gmail.com");
 
@@ -114,7 +114,7 @@ public class StudentServiceTest {
     when(studentRepository.save(any())).thenReturn(s1);
     when(jwtUtil.createUser(any())).thenReturn("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJzdHVkZW50In0.4lM-W9WpVSncN4UDvSv2EnXqFSctSftg2-vRPCPuyz4");
 
-    UserGetDTO userGetDto = studentService.addStudentJWT(studentPostDto);
+    UserGetDto userGetDto = studentService.addStudentJWT(studentPostDto);
     Assert.assertEquals(userGetDto.getEmail(),studentPostDto.getEmail());
     Assert.assertEquals(userGetDto.getName(),studentPostDto.getName());
     Assert.assertEquals(userGetDto.getJws(),"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJzdHVkZW50In0.4lM-W9WpVSncN4UDvSv2EnXqFSctSftg2-vRPCPuyz4");
@@ -124,7 +124,7 @@ public class StudentServiceTest {
   }
   @Test
   public void testCreateAdminJWT(){
-    StudentPostDTO studentPostDto = new StudentPostDTO();
+    StudentPostDto studentPostDto = new StudentPostDto();
     studentPostDto.setName("Jacky");
     studentPostDto.setEmail("jacky@gmail.com");
 
@@ -136,7 +136,7 @@ public class StudentServiceTest {
     when(studentRepository.save(any())).thenReturn(s1);
     when(jwtUtil.createUser(any())).thenReturn("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJhZG1pbiJ9.TKykTf7e57kH0dMz6XAsnMFMoL0JF3paOEOAbDTsV5U");
 
-    UserGetDTO userGetDto = studentService.addStudentJWT(studentPostDto);
+    UserGetDto userGetDto = studentService.addStudentJWT(studentPostDto);
     Assert.assertEquals(userGetDto.getEmail(),studentPostDto.getEmail());
     Assert.assertEquals(userGetDto.getName(),studentPostDto.getName());
     Assert.assertEquals(userGetDto.getJws(),"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJhZG1pbiJ9.TKykTf7e57kH0dMz6XAsnMFMoL0JF3paOEOAbDTsV5U");

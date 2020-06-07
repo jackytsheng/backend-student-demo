@@ -1,7 +1,7 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
-import com.example.demo.Dto.StudentGetDTO;
-import com.example.demo.Dto.UserGetDTO;
+import com.example.demo.dto.StudentGetDto;
+import com.example.demo.dto.UserGetDto;
 import com.example.demo.Service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,11 +35,11 @@ public class PostControllerTest {
   @Autowired
   private ObjectMapper mapper;
 
-  private List<StudentGetDTO> students;
-  private StudentGetDTO s1;
-  private StudentGetDTO s2;
-  private UserGetDTO u1;
-  private UserGetDTO u2;
+  private List<StudentGetDto> students;
+  private StudentGetDto s1;
+  private StudentGetDto s2;
+  private UserGetDto u1;
+  private UserGetDto u2;
   private String json1;
   private String json2;
 
@@ -52,10 +52,10 @@ public class PostControllerTest {
   @BeforeEach
   public void setUp() throws Exception{
     mockMvc = MockMvcBuilders.standaloneSetup(postController).build();
-    s1 = new StudentGetDTO();
-    s2 = new StudentGetDTO();
-    u1 = new UserGetDTO();
-    u2 = new UserGetDTO();
+    s1 = new StudentGetDto();
+    s2 = new StudentGetDto();
+    u1 = new UserGetDto();
+    u2 = new UserGetDto();
     s1.setName("Mike Chan");
     s1.setEmail("Miky@gmail.com");
     s1.setId(1L);
