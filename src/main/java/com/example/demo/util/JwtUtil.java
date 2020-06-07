@@ -1,23 +1,19 @@
-package com.example.demo.Util;
+package com.example.demo.util;
 
-import com.example.demo.Entity.Student;
+import com.example.demo.entity.Student;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-
-import java.security.Key;
 
 
 @Service
-public class jwtUtil {
+public class JwtUtil {
   final private SignatureAlgorithm algorithm = SignatureAlgorithm.HS256;
   String SECRETE_KEY = "JackySdLKDFJLKCNSDJFKSDLCXMXNCMVNMXCNVDJNWSDFSI";
   final private int EXPIRE_DURATION = 1000 * 3600 * 10; // 10 hours
 
   public String createUser(Student user){
-
     String jwt = Jwts.builder().setSubject(user.getName()).claim("role",user.getRole()).signWith(algorithm,SECRETE_KEY).compact();
     return jwt;
   }
@@ -28,8 +24,7 @@ public class jwtUtil {
       return Jwts.parserBuilder().setSigningKey(SECRETE_KEY).build().parseClaimsJws(jwt).getBody().get("role").equals("admin");
     }
     catch (JwtException e){
-      new RuntimeException("Something going wrong");
-      return false;
+      throw new JwtException("something goes wrong here");
     }
   }
 

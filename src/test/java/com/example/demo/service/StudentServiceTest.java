@@ -1,12 +1,12 @@
-package com.example.demo.Service;
+package com.example.demo.service;
 
 
 import com.example.demo.dto.StudentGetDto;
 import com.example.demo.dto.StudentPostDto;
 import com.example.demo.dto.UserGetDto;
-import com.example.demo.Entity.Student;
-import com.example.demo.Repository.StudentRepository;
-import com.example.demo.Util.jwtUtil;
+import com.example.demo.entity.Student;
+import com.example.demo.repository.StudentRepository;
+import com.example.demo.util.JwtUtil;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ public class StudentServiceTest {
   private StudentRepository studentRepository;
 
   @Mock
-  private jwtUtil jwtUtil;
+  private JwtUtil jwtUtil;
 
 
   @InjectMocks

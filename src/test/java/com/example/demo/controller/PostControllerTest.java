@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.StudentGetDto;
 import com.example.demo.dto.UserGetDto;
-import com.example.demo.Service.StudentService;
+import com.example.demo.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

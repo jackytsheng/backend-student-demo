@@ -1,25 +1,26 @@
-package com.example.demo.Service;
+package com.example.demo.service;
 
 
 import com.example.demo.dto.StudentGetDto;
 import com.example.demo.dto.StudentPostDto;
 import com.example.demo.dto.StudentPutDto;
-import com.example.demo.Entity.Student;
-import com.example.demo.Repository.StudentRepository;
-import com.example.demo.Service.Exception.StudentNotFoundException;
-import com.example.demo.Util.jwtUtil;
+import com.example.demo.entity.Student;
+import com.example.demo.repository.StudentRepository;
+import com.example.demo.exception.StudentNotFoundException;
+import com.example.demo.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class StudentService {
 
-  private final jwtUtil jwtUtil;
+  private final JwtUtil jwtUtil;
   private final StudentRepository studentRepository;
 
   public List<StudentGetDto> getAll(){
@@ -37,7 +38,7 @@ public class StudentService {
 
   public StudentGetDto getOneByID(Long id){
    StudentGetDto studentGetDto = new StudentGetDto();
-   Student student = studentRepository.findById(id).orElseThrow(()-> new StudentNotFoundException(id));
+   Student student = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
    studentGetDto.setId(student.getStudentID());
    studentGetDto.setName(student.getName());
    studentGetDto.setEmail(student.getEmail());
@@ -59,7 +60,11 @@ public class StudentService {
 
   public StudentGetDto edit(Long id, StudentPutDto studentPutDto){
     Student student;
-    student = studentRepository.findById(id).orElseThrow();
+    student = studentRepository.findById(id).orElseThrow( () -> {
+      log.error("no such id found");
+      throw new StudentNotFoundException(id);
+    }
+    );
     student.setName(studentPutDto.getName());
     student.setEmail(studentPutDto.getEmail());
     studentRepository.save(student);
@@ -70,8 +75,12 @@ public class StudentService {
     return studentGetDto;
   }
   public String delete(Long id){
+    studentRepository.findById(id).orElseThrow( () -> {
+          log.error("no such id found");
+          throw new StudentNotFoundException(id);
+        }
+    );
     studentRepository.deleteById(id);
     return "Student with id " + id + " is deleted";
   }
-
 }

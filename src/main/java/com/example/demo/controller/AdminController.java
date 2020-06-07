@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.Service.UserService;
+import com.example.demo.service.UserService;
 import com.example.demo.dto.StudentGetDto;
 import com.example.demo.dto.StudentPostDto;
 import com.example.demo.dto.UserGetDto;

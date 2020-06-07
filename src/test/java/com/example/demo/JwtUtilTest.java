@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.Entity.Student;
-import com.example.demo.Util.jwtUtil;
+import com.example.demo.entity.Student;
+import com.example.demo.util.JwtUtil;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class JwtUtilTest {
 
   @Autowired
-  jwtUtil jwtUtil;
+  JwtUtil jwtUtil;
 
   @Test
   public void testCreateUser(){

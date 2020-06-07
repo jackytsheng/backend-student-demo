@@ -3,8 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.StudentGetDto;
 import com.example.demo.dto.StudentPostDto;
-import com.example.demo.Service.StudentService;
-import com.example.demo.Util.jwtUtil;
+import com.example.demo.service.StudentService;
 import com.example.demo.dto.StudentPutDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
