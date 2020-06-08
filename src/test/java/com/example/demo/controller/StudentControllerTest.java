@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.StudentGetDto;
-import com.example.demo.dto.UserGetDto;
 import com.example.demo.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +40,6 @@ public class StudentControllerTest {
   private StudentController studentController;
 
   private String json1;
-  private String json2;
 
   @Autowired
   private ObjectMapper mapper;
@@ -49,51 +47,22 @@ public class StudentControllerTest {
   private StudentGetDto s1;
   private StudentGetDto s2;
 
-  private UserGetDto u1;
-  private UserGetDto u2;
-
   @BeforeEach
   public void setUp() throws Exception{
     mockMvc = MockMvcBuilders.standaloneSetup(studentController).build();
     s1 = new StudentGetDto();
     s2 = new StudentGetDto();
-    u1 = new UserGetDto();
-    u2 = new UserGetDto();
     s1.setName("Mike Chan");
     s1.setEmail("Miky@gmail.com");
     s1.setId(1L);
     s2.setName("Jacky Zheng");
     s2.setEmail("Jacky@gmail.com");
     s2.setId(2L);
-    u1.setName("Mike Chan");
-    u1.setEmail("Miky@gmail.com");
-    u1.setId(1L);
-    u1.setJws("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNaWtlIiwicm9sZSI6InN0dWRlbnQifQ.T7MempSggouXHg9RQ3EHFBMZvHObEw3IRJixwEo3tzE");
-    u2.setJws("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSBaaGVuZyIsInJvbGUiOiJhZG1pbiJ9.LoKMaBGiA9noXSc9TTMisQNmU2czs5QiIIoW1y_6r4g");
-    u2.setName("Jacky Zheng");
-    u2.setEmail("Jacky@gmail.com");
-    u2.setId(2L);
     students = new ArrayList<>();
     students.add(s1);
     students.add(s2);
     json1 = mapper.writeValueAsString(s1);
-    json2 = mapper.writeValueAsString(s2);
   }
-//  @BeforeEach
-//  public void setUp() throws Exception{
-//    mockMvc = MockMvcBuilders.standaloneSetup(getController).build();
-//    s1 = new StudentGetDto();
-//    s2 = new StudentGetDto();
-//    s1.setName("Mike Chan");
-//    s1.setEmail("Miky@gmail.com");
-//    s1.setId(1L);
-//    s2.setName("Jacky Zheng");
-//    s2.setEmail("Jacky@gmail.com");
-//    s2.setId(2L);
-//    students = new ArrayList<>();
-//    students.add(s1);
-//    students.add(s2);
-//  }
 
   @Test
   public void testGetAllStudents() throws Exception{
@@ -149,5 +118,4 @@ public class StudentControllerTest {
         .andExpect(content().string("Deleted"));
     verify(studentService,times(1)).delete(any());
   }
-
 }

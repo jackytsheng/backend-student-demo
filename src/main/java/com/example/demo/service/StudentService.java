@@ -20,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
 
-  private final JwtUtil jwtUtil;
   private final StudentRepository studentRepository;
 
   public List<StudentGetDto> getAll(){
