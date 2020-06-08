@@ -31,9 +31,6 @@ public class StudentServiceTest {
   @Mock
   private StudentRepository studentRepository;
 
-  @Mock
-  private JwtUtil jwtUtil;
-
 
   @InjectMocks
   private StudentService studentService;
@@ -100,50 +97,50 @@ public class StudentServiceTest {
     Assert.assertEquals(returnedStudents.get(1).getName(),s2.getName());
     Assert.assertEquals(returnedStudents.get(1).getId(),s2.getStudentID());
   }
-  @Test
-  public void testCreateStudentJWT(){
-    StudentPostDto studentPostDto = new StudentPostDto();
-    studentPostDto.setName("Jacky");
-    studentPostDto.setEmail("jacky@gmail.com");
-
-    Student s1 = new Student();
-    s1.setName("Jacky");
-    s1.setEmail("jacky@gmail.com");
-    s1.setStudentID(50000L);
-    s1.setRole("student");
-    when(studentRepository.save(any())).thenReturn(s1);
-    when(jwtUtil.createUser(any())).thenReturn("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJzdHVkZW50In0.4lM-W9WpVSncN4UDvSv2EnXqFSctSftg2-vRPCPuyz4");
-
-    UserGetDto userGetDto = studentService.addStudentJWT(studentPostDto);
-    Assert.assertEquals(userGetDto.getEmail(),studentPostDto.getEmail());
-    Assert.assertEquals(userGetDto.getName(),studentPostDto.getName());
-    Assert.assertEquals(userGetDto.getJws(),"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJzdHVkZW50In0.4lM-W9WpVSncN4UDvSv2EnXqFSctSftg2-vRPCPuyz4");
-    Assert.assertNotNull(userGetDto.getId());
-    verify(studentRepository).save(any());
-    verify(jwtUtil).createUser(any());
-  }
-  @Test
-  public void testCreateAdminJWT(){
-    StudentPostDto studentPostDto = new StudentPostDto();
-    studentPostDto.setName("Jacky");
-    studentPostDto.setEmail("jacky@gmail.com");
-
-    Student s1 = new Student();
-    s1.setName("Jacky");
-    s1.setEmail("jacky@gmail.com");
-    s1.setStudentID(50000L);
-    s1.setRole("admin");
-    when(studentRepository.save(any())).thenReturn(s1);
-    when(jwtUtil.createUser(any())).thenReturn("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJhZG1pbiJ9.TKykTf7e57kH0dMz6XAsnMFMoL0JF3paOEOAbDTsV5U");
-
-    UserGetDto userGetDto = studentService.addStudentJWT(studentPostDto);
-    Assert.assertEquals(userGetDto.getEmail(),studentPostDto.getEmail());
-    Assert.assertEquals(userGetDto.getName(),studentPostDto.getName());
-    Assert.assertEquals(userGetDto.getJws(),"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJhZG1pbiJ9.TKykTf7e57kH0dMz6XAsnMFMoL0JF3paOEOAbDTsV5U");
-    Assert.assertNotNull(userGetDto.getId());
-    verify(studentRepository).save(any());
-    verify(jwtUtil).createUser(any());
-  }
+//  @Test
+//  public void testCreateStudentJWT(){
+//    StudentPostDto studentPostDto = new StudentPostDto();
+//    studentPostDto.setName("Jacky");
+//    studentPostDto.setEmail("jacky@gmail.com");
+//
+//    Student s1 = new Student();
+//    s1.setName("Jacky");
+//    s1.setEmail("jacky@gmail.com");
+//    s1.setStudentID(50000L);
+//    s1.setRole("student");
+//    when(studentRepository.save(any())).thenReturn(s1);
+//    when(jwtUtil.createUser(any())).thenReturn("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJzdHVkZW50In0.4lM-W9WpVSncN4UDvSv2EnXqFSctSftg2-vRPCPuyz4");
+//
+//    UserGetDto userGetDto = userService.addStudentJWT(studentPostDto);
+//    Assert.assertEquals(userGetDto.getEmail(),studentPostDto.getEmail());
+//    Assert.assertEquals(userGetDto.getName(),studentPostDto.getName());
+//    Assert.assertEquals(userGetDto.getJws(),"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJzdHVkZW50In0.4lM-W9WpVSncN4UDvSv2EnXqFSctSftg2-vRPCPuyz4");
+//    Assert.assertNotNull(userGetDto.getId());
+//    verify(studentRepository).save(any());
+//    verify(jwtUtil).createUser(any());
+//  }
+//  @Test
+//  public void testCreateAdminJWT(){
+//    StudentPostDto studentPostDto = new StudentPostDto();
+//    studentPostDto.setName("Jacky");
+//    studentPostDto.setEmail("jacky@gmail.com");
+//
+//    Student s1 = new Student();
+//    s1.setName("Jacky");
+//    s1.setEmail("jacky@gmail.com");
+//    s1.setStudentID(50000L);
+//    s1.setRole("admin");
+//    when(studentRepository.save(any())).thenReturn(s1);
+//    when(jwtUtil.createUser(any())).thenReturn("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJhZG1pbiJ9.TKykTf7e57kH0dMz6XAsnMFMoL0JF3paOEOAbDTsV5U");
+//
+//    UserGetDto userGetDto = studentService.addStudentJWT(studentPostDto);
+//    Assert.assertEquals(userGetDto.getEmail(),studentPostDto.getEmail());
+//    Assert.assertEquals(userGetDto.getName(),studentPostDto.getName());
+//    Assert.assertEquals(userGetDto.getJws(),"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYWNreSIsInJvbGUiOiJhZG1pbiJ9.TKykTf7e57kH0dMz6XAsnMFMoL0JF3paOEOAbDTsV5U");
+//    Assert.assertNotNull(userGetDto.getId());
+//    verify(studentRepository).save(any());
+//    verify(jwtUtil).createUser(any());
+//  }
 
 
 }
