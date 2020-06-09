@@ -8,12 +8,6 @@ import java.util.Optional;
 
 
 public interface StudentRepository extends JpaRepository<Student,Long> {
-  //CRUD..
-  //GetAllstudent
-  //Get Student By Id
-  //Get Student By name
-  //GetStudent
-  //UpdateStudent
-  //deleteStudent
+  //try to customise searching.
   Optional<Student> findByName(String name);
 }
