@@ -20,7 +20,7 @@ http://localhost:8080/
 
 ## How to interact with it?
 
-Open [Postman](https://www.postman.com/). Then Import the `Students_Collection.json` .
+Open [Postman](https://www.postman.com/). Then Import the `Simple_Student_REST_Api.postman_collection.json` under the root directory.
 
 Or Check out the [Postman documentation for this project.](https://documenter.getpostman.com/view/9118370/SztJzPVj)
 
