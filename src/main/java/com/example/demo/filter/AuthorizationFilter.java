@@ -4,9 +4,11 @@ import com.example.demo.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -36,14 +38,14 @@ public class AuthorizationFilter implements Filter {
     if (httpRequest.getRequestURI().equals("/adminAccess")){
       String Authorization = httpRequest.getHeader("Authorization");
       if (Authorization == null){
-        //may be format issue that this isn't showing
-        httpServletResponse.sendError(SC_UNAUTHORIZED,"You need to log in first");
+        //there is still a issue that this message isn't showing
+        httpServletResponse.sendError(401,"You need to log in first");
       }else{
       if(jwt.isAdmin(Authorization)){
           chain.doFilter(request,response);
         }else{
-        httpServletResponse.getWriter().write("Unauthorised access.");
-          httpServletResponse.sendError(SC_FORBIDDEN);
+        //there is still a issue that this message isn't showing
+        httpServletResponse.sendError(403,"Unahorised access");
         }
     }}
     else{
