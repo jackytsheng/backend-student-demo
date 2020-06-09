@@ -22,7 +22,7 @@ http://localhost:8080/
 
 Open [Postman](https://www.postman.com/). Then Import the `Students_Collection.json` .
 
-Or Check out the documentation for Postman interaction with this project [here](https://documenter.getpostman.com/view/9118370/SztJzPVj)
+Or Check out the [Postman documentation for this project.](https://documenter.getpostman.com/view/9118370/SztJzPVj)
 
 
 ## How to check H2 In memory DataBase?
