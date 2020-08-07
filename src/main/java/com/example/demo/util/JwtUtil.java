@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtUtil {
   final private SignatureAlgorithm algorithm = SignatureAlgorithm.HS256;
+  //This can't be hard coded for the future.
   String SECRETE_KEY = "JackySdLKDFJLKCNSDJFKSDLCXMXNCMVNMXCNVDJNWSDFSI";
   final private int EXPIRE_DURATION = 1000 * 3600 * 10; // 10 hours
 

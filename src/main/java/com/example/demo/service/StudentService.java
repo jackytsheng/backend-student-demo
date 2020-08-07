@@ -37,7 +37,9 @@ public class StudentService {
 
   public StudentGetDto getOneByID(Long id){
    StudentGetDto studentGetDto = new StudentGetDto();
+
    Student student = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
+
    studentGetDto.setId(student.getStudentID());
    studentGetDto.setName(student.getName());
    studentGetDto.setEmail(student.getEmail());
