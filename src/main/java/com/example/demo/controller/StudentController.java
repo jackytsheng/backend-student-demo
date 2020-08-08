@@ -33,7 +33,7 @@ public class StudentController {
   }
 
   @PostMapping
-  ResponseEntity<StudentGetDto> add(@RequestBody StudentPostDto studentPostDto){
+  ResponseEntity<StudentGetDto> add(@RequestBody StudentPostDto studentPostDto) throws Exception {
     StudentGetDto studentGetDto = studentService.addStudent(studentPostDto);
     return new ResponseEntity<>(studentGetDto , HttpStatus.OK);
   }

@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -19,6 +19,14 @@ repositories {
 }
 
 dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.amqp/spring-amqp
+	compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '2.2.9.RELEASE'
+	// https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
+	compile group: 'com.rabbitmq', name: 'amqp-client', version: '5.9.0'
+	// https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+	compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.2.9.RELEASE'
+
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'io.jsonwebtoken:jjwt-api:0.11.1'
 	runtimeOnly 'mysql:mysql-connector-java'
@@ -32,10 +40,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'junit:junit:4.12'
 	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 //	testCompile "org.mockito:mockito-core:2.+"
 }
 
