@@ -1,10 +1,10 @@
 
-Simple Students app with Unit tests
-=========================
+## Simple Students app with Unit tests
 
-This project can be interact with the a frontend form, it can be found [here](https://github.com/jackytsheng/Jquery-Ajax-Learning). 
+1. This project can be interacted with a frontend form, it can be found [here](https://github.com/jackytsheng/Jquery-Ajax-Learning). 
+2. This project can be used to communicate with another [simple micro service](https://github.com/jackytsheng/node-demo) that used Node.js via **RabbitMQ**.
 
-## How to run it?
+### How to run it?
 
 If you have gradle installed and under target folder, run the following command:
 
@@ -19,14 +19,14 @@ http://localhost:8080/
 ```
 
 
-## How to interact with it?
+### How to interact with it?
 
 Open [Postman](https://www.postman.com/). Then Import the `Simple_Student_REST_Api.postman_collection.json` under the root directory.
 
 Or Check out the [Postman documentation for this project.](https://documenter.getpostman.com/view/9118370/SztJzPVj)
 
 
-## How to check H2 In memory DataBase?
+### How to check H2 In memory DataBase?
 In memory H2 Data base console can be accessed using the following link:
 ```
 http://localhost:8080/h2-console
@@ -42,7 +42,31 @@ spring.datasource.username=sa
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 
-## What is in this project ?
+### How to enable Rabbit MQ broker ?
+
+This project is using [Docker](https://hub.docker.com/_/rabbitmq) for interaction
+
+After pulling image
+
+run container
+
+```bash
+$ docker run -d -p 5672:5672 --name rabbit-test rabbitmq:latest
+```
+you can also enable management console:
+
+login in as `username: guest  password: guest`
+```bash
+$ docker run -d --name some-rabbit -p 15672:15672 rabbitmq:3-management
+```
+or combine run
+
+```bash
+$ docker run -d -p 5672:5672 -p 15672:15672 --name my-rabbit rabbitmq:3-management
+```
+
+Upon creation of student, a message will be sent to the Message broker.
+### What is in this project ?
 This is a simple *Restful Api* project.
 
 The backend is done with:
