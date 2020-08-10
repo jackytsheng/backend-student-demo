@@ -36,11 +36,6 @@ public class RabbitMQConfig {
       .noargs();
   }
   @Bean
-  public MessageConverter jsonMessageConverter() {
-    return new Jackson2JsonMessageConverter();
-  }
-
-  @Bean
   ConnectionFactory connectionFactory(){
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost("localhost");
